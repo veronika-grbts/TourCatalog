@@ -37,7 +37,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']  # Путь для статически
 # Путь для собранных статических файлов
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # Этот путь используется для хранения собранных статических файлов
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 INSTALLED_APPS = [
