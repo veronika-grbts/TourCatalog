@@ -26,11 +26,16 @@ SECRET_KEY = 'django-insecure-qqr0q8^fk@@xnzqlg#d+y_0!vybwd_&1+v+2zidorzlqe6yfjw
 DEBUG = False
 
 ALLOWED_HOSTS = []
-
 AUTH_USER_MODEL = 'users.user'
+
 # Application definition
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+
+# Путь для статических файлов в режиме разработки
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Путь для статических файлов, которые используются в проекте
+
+# Путь для собранных статических файлов
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Этот путь используется для хранения собранных статических файлов
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -45,6 +50,7 @@ INSTALLED_APPS = [
     'main',
     'users',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
