@@ -1,0 +1,103 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Створити новий тур{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'main/css/create_tour.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section class="create-tour">
+        <h2>Створення нового туру</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="title"><b>Назва туру</b></label>
+                {{ form.title }}
+                {% if form.title.errors %}
+                    <div class="error-message">
+                        {{ form.title.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="description"><b>Опис туру</b></label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                    <div class="error-message">
+                        {{ form.description.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="country"><b>Країна/Місце призначення</b></label>
+                {{ form.country }}
+                {% if form.country.errors %}
+                    <div class="error-message">
+                        {{ form.country.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="duration"><b>Тривалість туру (дні)</b></label>
+                {{ form.duration }}
+                {% if form.duration.errors %}
+                    <div class="error-message">
+                        {{ form.duration.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="price"><b>Ціна</b></label>
+                {{ form.price }}
+                {% if form.price.errors %}
+                    <div class="error-message">
+                        {{ form.price.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group">
+                <label for="tour_type"><b>Тип туру</b></label>
+                {{ form.tour_type }}
+                {% if form.tour_type.errors %}
+                    <div class="error-message">
+                        {{ form.tour_type.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="rating"><b>Рейтинг (0-5)</b></label>
+                {{ form.rating }}
+                {% if form.rating.errors %}
+                    <div class="error-message">
+                        {{ form.rating.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-group">
+                <label for="image"><b>Зображення туру</b></label>
+                {{ form.image }}
+                {% if form.image.errors %}
+                    <div class="error-message">
+                        {{ form.image.errors|join:", " }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-success">Додати</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

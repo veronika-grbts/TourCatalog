@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Каталог турів{% endblock %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section class="hero">
+        <h2 class="hero-title">Відкрийте свою наступну пригоду</h2>
+        <p class="hero-text">Досліджуйте найкращі тури світу, підібрані саме для вас.</p>
+        <a href="{% url 'all_tours' %}" class="btn btn-primary">Переглянути тури</a>
+    </section>
+
+    <section class="gallery">
+        <h3 class="gallery-title">Найпопулярніші напрямки</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+               <a href="{% url 'tour_type' 'beach' %}">
+                    <img src="{% static 'main/images/beach.jpg' %}" alt="Пляжний відпочинок">
+                    <p>Пляжний відпочинок</p>
+                </a>
+            </div>
+            <div class="gallery-item">
+               <a href="{% url 'tour_type' 'ski' %}">
+                    <img src="{% static 'main/images/mountains.jpg' %}" alt="Гори">
+                    <p>Гірськолижний тур</p>
+                </a>
+            </div>
+            <div class="gallery-item">
+                  <a href="{% url 'tour_type' 'excursion' %}">
+                    <img src="{% static 'main/images/city.jpg' %}" alt="Міський тур">
+                    <p>Міський тур</p>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

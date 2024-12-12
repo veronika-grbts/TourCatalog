@@ -1,0 +1,19 @@
+<div class="tour-grid">
+    {% for tour_item in tours %}
+        <div class="tour-item">
+            <a href="{% url 'tour_detail' tour_item.id %}">
+                <div class="tour-image">
+                    {% if tour_item.image %}
+                        <img src="{{ tour_item.image.url }}" alt="{{ tour_item.title }}">
+                    {% else %}
+                        <img src="{% static 'main/images/empty.jpg' %}" alt="Дефолтное изображение">
+                    {% endif %}
+                </div>
+
+                <h3>{{ tour_item.title }}</h3>
+                <p>{{ tour_item.description|slice:":100" }}...</p>
+                <p><strong>Ціна: {{ tour_item.price }} грн</strong></p>
+            </a>
+        </div>
+    {% endfor %}
+</div>

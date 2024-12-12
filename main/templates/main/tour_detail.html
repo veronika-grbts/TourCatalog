@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}{{ tour.title }}{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'main/css/tour_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section class="tour-detail">
+        <h2>{{ tour.title }}</h2>
+        <p><strong>Тип туру:</strong> {{ tour_type_display }}</p>
+        <p><strong>Опис:</strong> {{ tour.description }}</p>
+        <p><strong>Країна/Місце призначення:</strong> {{ tour.country }}</p>
+        <p><strong>Тривалість:</strong> {{ tour.duration }} днів</p>
+        <p><strong>Ціна:</strong> {{ tour.price }} грн</p>
+        <p><strong>Рейтинг:</strong> {{ tour.rating }}</p>
+
+        {% if tour.image %}
+        <img src="{{ tour.image.url }}" alt="{{ tour.title }}" class="tour-image">
+        {% else %}
+        <p><i>Зображення відсутнє</i></p>
+        {% endif %}
+
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-back">
+            <img src="{% static 'main/images/left.png' %}" alt="Назад" class="btn-icon">
+            Назад
+        </a>
+    </section>
+</main>
+{% endblock %}

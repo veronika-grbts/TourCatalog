@@ -1,0 +1,10 @@
+/venv/pyvenv.cfg
+*.pyc
+*~
+__pycache__
+venv
+db.sqlite3
+/Lib
+.DS_Store
+
+

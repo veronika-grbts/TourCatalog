@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Тур не найден{% endblock %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'main/css/tour_not_found.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section class="tour-not-found">
+        <div class="error-message">
+            <h2>Тур не знайдений!</h2>
+            <p>Вибачте, але такий тур не існує. Через кілька секунд вас буде перенаправлено на головну сторінку.</p>
+        </div>
+    </section>
+</main>
+
+<script type="text/javascript">
+    setTimeout(function() {
+        window.location.href = '/';
+    }, 5000);
+</script>
+{% endblock %}

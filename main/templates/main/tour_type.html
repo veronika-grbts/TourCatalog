@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Тури: {{ tour_type_display }}{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'main/css/tour_type.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section class="tour-list">
+        <h2 class="tour-list-title">Тури за категорією: {{ tour_type_display }}</h2>
+
+        <div class="tour-grid">
+            {% for tour_item in tours %}
+                <div class="tour-item">
+                    <a href="{% url 'tour_detail' tour_item.id %}">
+                        <div class="tour-image">
+                            {% if tour_item.image %}
+                                <img src="{{ tour_item.image.url }}" alt="{{ tour_item.title }}">
+                            {% else %}
+                                <img src="{% static 'main/images/empty.jpg' %}" alt="Дефолтное изображение">
+                            {% endif %}
+                        </div>
+
+                        <h3>{{ tour_item.title }}</h3>
+                        <p>{{ tour_item.description|slice:":100" }}...</p>
+                        <p><strong>Ціна: {{ tour_item.price }} грн</strong></p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="pagination-buttons">
+            {% if tours.has_previous %}
+                <a href="?page={{ tours.previous_page_number }}" class="pagination-arrow">
+                    <img src="{% static 'main/images/left-arrow.png' %}" alt="Назад">
+                </a>
+            {% endif %}
+
+            {% if tours.has_next %}
+                <a href="?page={{ tours.next_page_number }}" class="pagination-arrow">
+                    <img src="{% static 'main/images/right-arrow.png' %}" alt="Вперед">
+                </a>
+            {% endif %}
+        </div>
+    </section>
+</main>
+{% endblock %}

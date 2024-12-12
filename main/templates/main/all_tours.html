@@ -1,0 +1,133 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Тури{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'main/css/all_tours.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="main">
+
+    <section class="tour-list">
+
+        <section id="search-container">
+            <form method="get" action="{% url 'all_tours' %}" id="search-form">
+                <input type="text" name="search" placeholder="Пошук за назвою" value="{{ search_query }}"
+                       id="search-input">
+                <button type="submit" style="display: none;">Пошук</button>
+                <div class="filter-icon" onclick="toggleFilters()">
+                    <img src="{% static 'main/images/essential.png' %}" alt="Фильтри" class="filter-image">
+                </div>
+                <div class="filter-icon">
+                    <a href="{% url 'all_tours' %}">
+                        <img src="{% static 'main/images/loop.png' %}" alt="Фильтри оновлення" class="filter-image">
+                    </a>
+                </div>
+
+            </form>
+
+            {% if no_results_message %}
+            <div class="no-results">{{ no_results_message }}</div>
+            {% endif %}
+        </section>
+
+        <div class="filter-sidebar" id="filter-sidebar">
+            <div class="filter-header">
+                <h3>Фільтри</h3>
+            </div>
+
+            <form method="get" action="{% url 'all_tours' %}" id="filter-form">
+
+                <h4>Країни</h4>
+                <div id="countries-list">
+                    {% for country in countries %}
+                    <label class="country-label {% if forloop.counter > 10 %}country-hidden{% endif %}">
+                        <input type="checkbox" name="country" value="{{ country }}" {% if country in selected_countries %}checked{% endif %}>
+                        {{ country }}
+                    </label>
+                    {% endfor %}
+                </div>
+
+                <div id="toggle-buttons">
+                    {% if countries|length > 10 %}
+                    <button type="button" id="show-more" onclick="showMoreCountries()" class="btn-filter" >Показати все</button>
+                    <button type="button" id="show-less" onclick="showLessCountries()" style="display: none;">
+                        Приховати
+                    </button>
+                    {% endif %}
+                </div>
+
+
+                <h4>Ціни</h4>
+                <div id="price-range">
+                    <div>
+            <span>від
+                <input type="number" name="min_price" value="{{ min_price|floatformat:0 }}"
+                       min="{{ price_range.min_price }}" max="{{ price_range.max_price }}"
+                       class="price-input">
+            </span>
+                        до
+                        <span>
+                <input type="number" name="max_price" value="{{ max_price|floatformat:0 }}"
+                       min="{{ price_range.min_price }}" max="{{ price_range.max_price }}"
+                       class="price-input">
+            </span>
+                    </div>
+                </div>
+
+
+                <h4>Типи турів</h4>
+                {% for value, label in tour_types %}
+                <label>
+                    <input type="checkbox" name="tour_type" value="{{ value }}" {% if value in selected_tour_types %}checked{% endif %}>
+                    {{ label }}
+                </label>
+                {% endfor %}
+
+
+                <button type="submit" class="apply-filters">Застосувати</button>
+            </form>
+
+        </div>
+
+        <section class="tour-list">
+            {% if tours %}
+            <div class="tour-list">
+                {% for tour_item in tours %}
+                <div class="tour-card">
+                    <a href="{% url 'tour_detail' tour_item.id %}">
+                        <div class="tour-image">
+                            {% if tour_item.image %}
+                            <img src="{{ tour_item.image.url }}" alt="{{ tour_item.title }}">
+                            {% else %}
+                            <img src="{% static 'main/images/empty.jpg' %}" alt="Дефолтное изображение">
+                            {% endif %}
+                        </div>
+                        <div class="tour-info">
+                            <h3>{{ tour_item.title }}</h3>
+                            <p>{{ tour_item.description|slice:":100" }}...</p>
+                            <p><strong>Ціна: {{ tour_item.price|floatformat:0 }} грн</strong></p>
+                            <div>
+                                <a href="{% url 'tour_edit' tour_item.id %}" class="buttons">Редагувати</a>
+                                <a href="{% url 'tour_delete' tour_item.id %}" class="buttons">Видалити</a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="no-results">Пробачте, але за таким запитом не було знайдено жодного туру</div>
+            {% endif %}
+        </section>
+    </section>
+</main>
+
+<script src="{% static 'main/js/all_tour.js' %}"></script>
+{% endblock %}
+
+{% block pagination %}
+{{ block.super }}
+{% endblock %}

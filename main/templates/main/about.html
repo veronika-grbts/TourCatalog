@@ -1,0 +1,68 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Про нас{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'main/css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="about-page">
+    <h2>Про нас</h2>
+    <p>Ласкаво просимо до нашого туристичного каталогу! Цей ресурс створенний для того, щоб допомогти вам знайти
+        найкращі туристичні пропозиції.</p>
+
+    <div class="about-blocks-container">
+
+        <div class="about-block vec-img">
+            <div>
+                <img src="{% static 'main/images/standing.jpg' %}" alt="Вертикальна картинка">
+            </div>
+        </div>
+
+        <!-- Наші тури -->
+        <div class="about-block values">
+            <h3>Великий вибір категорій турів</h3>
+            <div class="tour-types">
+                <div class="column">
+                    <p>Гастрономічний</p>
+                    <p>Екскурсійний</p>
+                    <p>Гірськолижний</p>
+                    <p>Екотуризм</p>
+                    <p>Оздоровчий</p>
+                    <p>Круїзний</p>
+                    <p>Пляжний</p>
+
+                    <p>та багато інших</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-block img">
+            <div>
+                <img src="{% static 'main/images/section.jpg' %}" alt="Азія">
+            </div>
+        </div>
+
+
+        <div class="about-block mission">
+            <h3>Наша мета</h3>
+            <p>Допомагати людям знаходити ідеальні подорожі, які залишать незабутні враження.</p>
+        </div>
+
+
+        <div class="about-block team">
+            <img src="{% static 'main/images/team.jpg' %}" alt="Наша команда">
+            <div>
+                <h3>Наша команда</h3>
+                <p>Ми — команда професіоналів з досвідом роботи в туризмі, програмуванні та дизайні. Кожен з нас має
+                    свою спеціалізацію, але всі ми працюємо разом, щоб зробити цей сайт найкращим ресурсом для
+                    подорожей.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

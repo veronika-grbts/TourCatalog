@@ -1,0 +1,20 @@
+{% load static %}
+
+<div class="carousel">
+
+        <button class="arrow left-arrow" data-action="previous" data-url="{{ previous_url }}">
+            <img src="{% static 'main/images/left-arrow.png' %}" alt="Previous">
+        </button>
+
+</div>
+
+<div class="carousel">
+
+    {% if has_next %}
+        <button class="arrow right-arrow" data-action="next" data-url="{{ next_url }}">
+            <img src="{% static 'main/images/right-arrow.png' %}" alt="Next">
+        </button>
+    {% endif %}
+</div>
+
+<script src="{% static 'main/js/carousel.js' %}"></script>
